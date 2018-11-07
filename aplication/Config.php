@@ -1,6 +1,6 @@
 <?php
 
-define("DEFAULT_CONTROLLER", "transacciones");
+define("DEFAULT_CONTROLLER", "categorias");
 define("DEFAULT_LAYOUT", "default");
 define("APP_FOLDER", "IT101/money");
 define("APP_URL", "http://".$_SERVER['SERVER_NAME'].":8080/".APP_FOLDER."/");
