@@ -31,7 +31,10 @@
                     <th>Cantidad</th>
                     <th>Acción</th>
                 </tr>
-                <?php foreach ($this->transacciones as $transaccion): ?>
+                <?php $balance = 0;
+                $ingreso = 0;
+                $egreso = 0;
+                foreach ($this->transacciones as $transaccion): ?>
                     <tr>
                         <td><?php echo $transaccion["t"]["id"]; ?></td>
                         <td><?php echo $transaccion["a"]["name"]; ?></td>
@@ -40,18 +43,28 @@
                         <td><?php
                             $date = new DateTime($transaccion["t"]["date"]);
                             echo $date->format('d/m/Y'); ?></td>
-                        <td><?php echo $transaccion["t"]["amount"]; ?></td>
+                        <td>$<?php
+                                if ($transaccion["t"]["amount"] > 0){
+                                    $balance = $balance + $transaccion["t"]["amount"];
+                                    echo "<label style='color: green'>".$transaccion["t"]["amount"]."</label>";
+                                }else{
+                                    $balance = $balance - $transaccion["t"]["amount"];
+                                    echo "<label style='color: red'>".$transaccion["t"]["amount"]."</label>"; }
+                            ?></td>
                         <td> <a href="<?php echo APP_URL."transacciones/editar/".$transaccion["t"]["id"]; ?>"><i class="small material-icons">edit</i></a>
                             <a href="<?php echo APP_URL."transacciones/eliminar/".$transaccion["t"]["id"]; ?>" class="confirmation"><i class="small material-icons">delete</i></a>
-                            <?php
-                            if ($transaccion["t"]["amount"]==1){ ?>
-                            <a href="<?php echo APP_URL."tareas/cambiarEstado/".$transaccion["t"]["id"]."/off"; ?>"><span class="glyphicon glyphicon-ok"></span></a></td>
-                        <?php  }elseif ($transaccion["t"]["amount"]==0){ ?>
-                            <a href="<?php echo APP_URL."tareas/cambiarEstado/".$transaccion["t"]["id"]."/on"; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
-                        <?php  } ?>
                     </tr>
+                    <?php if ($transaccion["t"]["amount"] > 0) {
+                        $ingreso = $transaccion["t"]["amount"] + $ingreso;
+                    }else{
+                        $egreso = $transaccion["t"]["amount"] + $egreso;
+                    } ?>
                 <?php endforeach; ?>
             </table>
+            <br>
+            <?php echo "<label class='right' style='color: blue'>".$balance."</label><label class='right'>Balance: $ </label><br>"; ?>
+            <?php echo "<label class='right' style='color: green'>".$ingreso."</label><label class='right'>Ingreso:  $</label><br>"; ?>
+            <?php echo "<label class='right' style='color: red'>".$egreso."</label><label class='right'>Egreso: $ </label>"; ?>
         </div>
     </div>
 </div>
