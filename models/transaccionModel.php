@@ -8,7 +8,7 @@ class TransaccionModel extends AppModel
 
     public function getTransacciones(){
         $transacciones = $this->_db->query("SELECT t.id,a.name,c.name,description,date,amount 
-                                            FROM transactions t INNER JOIN categories c ON t.category_id=c.id INNER JOIN accounts a ON t.account_id=a.id ");
+                                            FROM transactions t INNER JOIN categories c ON t.category_id=c.id INNER JOIN accounts a ON t.account_id=a.id ORDER BY t.id");
 
         foreach (range(0,$transacciones->columnCount()-1) as $column_index){
             $meta[] = $transacciones->getColumnMeta($column_index);
@@ -48,7 +48,8 @@ class TransaccionModel extends AppModel
 
     public function buscarPorId($id){
         $transaccion = $this->_db->prepare(
-            "SELECT * FROM transactions WHERE id=:id"
+            "SELECT t.id,a.name,t.account_id,c.name,t.category_id,description,date,amount 
+                                            FROM transactions t INNER JOIN categories c ON t.category_id=c.id INNER JOIN accounts a ON t.account_id=a.id WHERE t.id=:id"
         );
         $transaccion->bindParam(":id", $id);
         $transaccion->execute();
@@ -79,6 +80,16 @@ class TransaccionModel extends AppModel
         $consulta->bindParam(":date", $datos["date"]);
         $consulta->bindParam(":amount", $datos["amount"]);
 
+        if ($consulta->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function eliminarPorId($id){
+        $consulta = $this->_db->prepare("DELETE FROM transactions WHERE id=:id");
+        $consulta->bindParam(":id", $id);
         if ($consulta->execute()){
             return true;
         }else{

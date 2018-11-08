@@ -47,7 +47,7 @@ class transaccionesController extends AppController
             }
         }
         $transaccion = $this->loadModel("transaccion");
-        $this->_view->tarea = $transaccion->buscarPorId($id);
+        $this->_view->transacciones = $transaccion->buscarPorId($id);
 
         $cuentas = $this->loadModel("cuentas");
         $this->_view->cuentas = $cuentas->getCuentas();
@@ -57,5 +57,15 @@ class transaccionesController extends AppController
 
         $this->_view->titulo = "Editar transaccion";
         $this->_view->renderizar("editar");
+    }
+
+    public function eliminar($id){
+        $transaccion = $this->loadModel("transaccion");
+        $registro = $transaccion->buscarPorId($id);
+
+        if (!empty($registro)){
+            $transaccion->eliminarPorId($id);
+            $this->_messages->success('Transacción eliminada correctamente', $this->redirect(array("controller"=>"transacciones")));
+        }
     }
 }
