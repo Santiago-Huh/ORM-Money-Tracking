@@ -96,4 +96,10 @@ class TransaccionModel extends AppModel
             return false;
         }
     }
+
+    public function ingresos(){
+        $ingreso = $this->_db->query("SELECT ROUND(SUM(amount), 2) AS Ingreso FROM transactions");
+
+        return $ingreso->fetchall();
+    }
 }

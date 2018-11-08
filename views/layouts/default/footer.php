@@ -12,5 +12,23 @@
         $('select').formSelect();
     });
 </script>
+
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Money Tracking ORM</h5>
+                <p class="grey-text text-lighten-4">ORM basado en Money Tracking</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2018 Copyright Santiago Huh
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
