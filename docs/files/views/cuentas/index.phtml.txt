@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Lista de cuentas</h2>
+        <div class="">
+            <a href="<?php echo APP_URL."transacciones/index"; ?>" >
+                <button type="button" class="waves-effect waves-light btn-small">
+                    <i class="small material-icons left">arrow_back</i> Transacciones
+                </button>
+            </a>
+            <a href="<?php echo APP_URL."cuentas/agregar"; ?>" class="right">
+                <button type="button" class="waves-effect waves-light btn-small">
+                    <i class="small material-icons left">add_box</i> Cuenta
+                </button>
+            </a>
+        </div>
+        <div class="">
+
+        </div>
+        <br><br>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-condensed responsive-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                </tr>
+                <?php foreach ($this->cuentas as $cuenta): ?>
+                    <tr>
+                        <td><?php echo $cuenta["id"]; ?></td>
+                        <td><?php echo $cuenta["name"]; ?></td>
+                        <td> <a href="<?php echo APP_URL."cuentas/editar/".$cuenta["id"]; ?>"><i class="small material-icons">edit</i></a>
+                            <a href="<?php echo APP_URL."cuentas/eliminar/".$cuenta["id"]; ?>" class="confirmation"><i class="small material-icons">delete</i></a>
+                    </tr>
+                <?php endforeach; ?>
+
+            </table>
+        </div>
+    </div>
+</div>
+
