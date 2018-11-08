@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Lista de transacciones</h2>
+        <div class="">
+            <a href="<?php echo APP_URL."transacciones/agregar"; ?>" >
+                <button type="button" class="waves-effect waves-light btn-small">
+                    <i class="small material-icons left">add</i> Transacción
+                </button>
+            </a>
+            <a href="<?php echo APP_URL."categorias/index"; ?>">
+                <button type="button" class="waves-effect waves-light btn-small">
+                    <i class="small material-icons left">bookmark</i> Ver Categorías
+                </button>
+            </a>
+            <a href="<?php echo APP_URL."cuentas/index"; ?>">
+                <button type="button" class="waves-effect waves-light btn-small">
+                    <i class="small material-icons left">book</i> Ver Cuentas
+                </button>
+            </a>
+        </div>
+        <br><br>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-condensed">
+                <tr>
+                    <th>ID</th>
+                    <th>Cuenta</th>
+                    <th>Categoria</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Acción</th>
+                </tr>
+                <?php foreach ($this->transacciones as $transaccion): ?>
+                    <tr>
+                        <td><?php echo $transaccion["t"]["id"]; ?></td>
+                        <td><?php echo $transaccion["a"]["name"]; ?></td>
+                        <td><?php echo $transaccion["c"]["name"]; ?></td>
+                        <td><?php echo $transaccion["t"]["description"]; ?></td>
+                        <td><?php
+                            $date = new DateTime($transaccion["t"]["date"]);
+                            echo $date->format('d/m/Y');
+                            //echo $tarea["tareas"]["fecha"]; ?></td>
+                        <td><?php echo $transaccion["t"]["amount"]; ?></td>
+                        <td> <a href="<?php echo APP_URL."transacciones/editar/".$transaccion["t"]["id"]; ?>"><i class="small material-icons">edit</i></a>
+                            <a href="<?php echo APP_URL."transacciones/eliminar/".$transaccion["t"]["id"]; ?>" class="confirmation"><i class="small material-icons">delete</i></a>
+                            <?php
+                            if ($transaccion["t"]["amount"]==1){ ?>
+                            <a href="<?php echo APP_URL."tareas/cambiarEstado/".$transaccion["t"]["id"]."/off"; ?>"><span class="glyphicon glyphicon-ok"></span></a></td>
+                        <?php  }elseif ($transaccion["t"]["amount"]==0){ ?>
+                            <a href="<?php echo APP_URL."tareas/cambiarEstado/".$transaccion["t"]["id"]."/on"; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        <?php  } ?>
+                    </tr>
+                <?php endforeach; ?>
+
+            </table>
+        </div>
+    </div>
+</div>
