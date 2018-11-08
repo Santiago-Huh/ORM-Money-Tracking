@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Lista de categorias</h2>
-            <div class="btn-group pull-left">
-                <a href="<?php echo APP_URL."tareas/index"; ?>" >
-                    <button type="button" class="btn btn-primary add">
-                        <span class="glyphicon glyphicon-arrow-left"></span> Tareas
+            <div class="">
+                <a href="<?php echo APP_URL."transacciones/index"; ?>" >
+                    <button type="button" class="waves-effect waves-light btn-small">
+                        <i class="small material-icons left">arrow_back</i> Tareas
                     </button>
                 </a>
             </div>
-            <div class="btn-group pull-right">
+            <div class="">
                 <a href="<?php echo APP_URL."categorias/agregar"; ?>">
-                    <button type="button" class="btn btn-primary add">
-                        <span class="glyphicon glyphicon-plus"></span> Categoría
+                    <button type="button" class="waves-effect waves-light btn-small">
+                        <i class="small material-icons left">add_box</i> Categoría
                     </button>
                 </a>
             </div>
@@ -26,9 +26,9 @@
                 <?php foreach ($this->categorias as $categoria): ?>
                     <tr>
                         <td><?php echo $categoria["id"]; ?></td>
-                        <td><?php echo $categoria["nombre"]; ?></td>
-                        <td> <a href="<?php echo APP_URL."categorias/editar/".$categoria["id"]; ?>"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="<?php echo APP_URL."categorias/eliminar/".$categoria["id"]; ?>" class="confirmation"><span class="glyphicon glyphicon-trash"></span></a>
+                        <td><?php echo $categoria["name"]; ?></td>
+                        <td> <a href="<?php echo APP_URL."categorias/editar/".$categoria["id"]; ?>"><i class="small material-icons">edit</i></a>
+                             <a href="<?php echo APP_URL."categorias/eliminar/".$categoria["id"]; ?>" class="confirmation"><i class="small material-icons">delete</i></a>
                     </tr>
                 <?php endforeach; ?>
 

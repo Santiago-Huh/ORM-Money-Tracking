@@ -1,0 +1,18 @@
+<h2>Agregar Categoria</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <form action="<?php echo APP_URL."categorias/agregar"; ?>" method="POST">
+
+            <label for="nombre">Nombre</label>
+            <input type="text" name="name" class="form-control">
+            <br>
+
+            <a href="<?php echo APP_URL."categorias/index"; ?>" >
+                <button type="button" class="btn btn-default">Cancelar</button>
+            </a>
+            <input type="submit" class="btn btn-primary" value="Guardar Categoria">
+    </div>
+
+        </form>
+</div>
